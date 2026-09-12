@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Admin</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ================= LOGIN ================= -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <h1>Website Admin</h1>
+    <p>Enter the password to manage your apology card.</p>
+    <input type="password" id="pwInput" placeholder="Password" autocomplete="off">
+    <div class="login-error" id="loginError"></div>
+    <button class="btn-primary" id="loginBtn" style="width:100%;">Unlock</button>
+    <p class="login-note">This is a simple client-side lock for a static site — a convenience against casual visitors, not real security. Anyone with technical access to the page's code can bypass it.</p>
+  </div>
+</div>
+
+<!-- ================= DASHBOARD ================= -->
+<div class="admin-shell" id="adminShell" style="display:none;">
+  <aside class="sidebar">
+    <div class="brand">
+      <h1>Website Admin</h1>
+      <p>Customize your apology card</p>
+    </div>
+    <ul class="nav-list">
+      <li><button class="nav-item active" data-section="general">General</button></li>
+      <li><button class="nav-item" data-section="opening">Opening</button></li>
+      <li><button class="nav-item" data-section="message">Message</button></li>
+      <li><button class="nav-item" data-section="final">Final Message</button></li>
+      <li><button class="nav-item" data-section="design">Design</button></li>
+      <li><button class="nav-item" data-section="music">Music</button></li>
+      <li><button class="nav-item" data-section="preview">Preview</button></li>
+    </ul>
+    <button class="logout-btn" id="logoutBtn">Log out</button>
+  </aside>
+
+  <main class="main">
+
+    <!-- GENERAL -->
+    <section class="section-panel active" id="section-general">
+      <div class="page-header"><h2>General</h2><p>Names and titles used across the site.</p></div>
+      <div class="card">
+        <h3>Names</h3>
+        <div class="two-col">
+          <div class="field"><label>Friend's Name</label><input type="text" id="f-friendName" placeholder="Nistha"></div>
+          <div class="field"><label>Your Name</label><input type="text" id="f-yourName" placeholder="Vasu"></div>
+        </div>
+        <p class="hint">Leave a name blank to hide it on the public page.</p>
+      </div>
+      <div class="card">
+        <h3>Titles</h3>
+        <div class="field"><label>Website Title</label><input type="text" id="f-websiteTitle" placeholder="Just Something I Wanted To Say"></div>
+        <div class="field"><label>Browser Tab Title</label><input type="text" id="f-tabTitle" placeholder="I'm Sorry"></div>
+      </div>
+      <div class="card">
+        <h3>Admin Access</h3>
+        <div class="field"><label>Admin Password</label><input type="text" id="f-adminPassword" placeholder="sorry"></div>
+        <p class="hint">Remember: this only deters casual visitors on a static site — treat it as a lock on a diary, not a vault.</p>
+      </div>
+    </section>
+
+    <!-- OPENING -->
+    <section class="section-panel" id="section-opening">
+      <div class="page-header"><h2>Opening Card</h2><p>The very first thing your friend sees.</p></div>
+      <div class="card">
+        <div class="field"><label>Main Heading</label><input type="text" id="f-openingHeading"></div>
+        <div class="field"><label>Subtitle</label><input type="text" id="f-openingSubtitle"></div>
+        <div class="field"><label>Button Text</label><input type="text" id="f-openingButton"></div>
+      </div>
+    </section>
+
+    <!-- MESSAGE CARDS -->
+    <section class="section-panel" id="section-message">
+      <div class="page-header"><h2>Message Cards</h2><p>Four cards that tell the story, in order.</p></div>
+      <div class="card">
+        <h3>Card 2</h3>
+        <div class="field"><label>Heading</label><input type="text" id="f-card0-heading"></div>
+        <div class="field"><label>Message</label><textarea id="f-card0-message" maxlength="600"></textarea><div class="char-count"></div></div>
+      </div>
+      <div class="card">
+        <h3>Card 3</h3>
+        <div class="field"><label>Heading</label><input type="text" id="f-card1-heading"></div>
+        <div class="field"><label>Message</label><textarea id="f-card1-message" maxlength="600"></textarea><div class="char-count"></div></div>
+      </div>
+      <div class="card">
+        <h3>Card 4</h3>
+        <div class="field"><label>Heading</label><input type="text" id="f-card2-heading"></div>
+        <div class="field"><label>Message</label><textarea id="f-card2-message" maxlength="600"></textarea><div class="char-count"></div></div>
+      </div>
+      <div class="card">
+        <h3>Card 5</h3>
+        <div class="field"><label>Heading</label><input type="text" id="f-card3-heading"></div>
+        <div class="field"><label>Message</label><textarea id="f-card3-message" maxlength="600"></textarea><div class="char-count"></div></div>
+      </div>
+      <p class="hint">Line breaks you type here will appear the same way on the public page. You can use {{friend}} or {{me}} anywhere to insert the names from General.</p>
+    </section>
+
+    <!-- FINAL MESSAGE -->
+    <section class="section-panel" id="section-final">
+      <div class="page-header"><h2>Final Message</h2><p>How the card closes.</p></div>
+      <div class="card">
+        <div class="field"><label>Final Heading</label><input type="text" id="f-finalHeading"></div>
+        <div class="field"><label>Final Message</label><textarea id="f-finalMessage" maxlength="600"></textarea><div class="char-count"></div></div>
+        <div class="field"><label>Small Closing Text</label><input type="text" id="f-finalClosing"></div>
+        <div class="field"><label>Replay Button Text</label><input type="text" id="f-finalReplay"></div>
+      </div>
+    </section>
+
+    <!-- DESIGN -->
+    <section class="section-panel" id="section-design">
+      <div class="page-header"><h2>Design</h2><p>Colors and presets for the public page.</p></div>
+
+      <div class="card">
+        <h3>Preset Themes</h3>
+        <div class="preset-grid">
+          <button class="preset-card" data-preset="roseGarden">
+            <div class="preset-swatches">
+              <span class="preset-swatch" style="background:#c2185b"></span>
+              <span class="preset-swatch" style="background:#fdecf1"></span>
+              <span class="preset-swatch" style="background:#d4af6a"></span>
+            </div>
+            <span>🌸 Rose Garden</span>
+          </button>
+          <button class="preset-card" data-preset="softPink">
+            <div class="preset-swatches">
+              <span class="preset-swatch" style="background:#f3a8c4"></span>
+              <span class="preset-swatch" style="background:#fff6f9"></span>
+              <span class="preset-swatch" style="background:#c98fae"></span>
+            </div>
+            <span>🌷 Soft Pink</span>
+          </button>
+          <button class="preset-card" data-preset="deepRose">
+            <div class="preset-swatches">
+              <span class="preset-swatch" style="background:#5c0f26"></span>
+              <span class="preset-swatch" style="background:#fbeef1"></span>
+              <span class="preset-swatch" style="background:#d4af6a"></span>
+            </div>
+            <span>🌹 Deep Rose</span>
+          </button>
+          <button class="preset-card" data-preset="elegantBlush">
+            <div class="preset-swatches">
+              <span class="preset-swatch" style="background:#f7dbe3"></span>
+              <span class="preset-swatch" style="background:#ffffff"></span>
+              <span class="preset-swatch" style="background:#b98a4f"></span>
+            </div>
+            <span>✨ Elegant Blush</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Custom Colors</h3>
+        <div class="field">
+          <label>Background color</label>
+          <div class="color-field"><input type="color" id="f-bg"><input type="text" id="f-bgText"></div>
+        </div>
+        <div class="field">
+          <label>Secondary background color</label>
+          <div class="color-field"><input type="color" id="f-bg2"><input type="text" id="f-bg2Text"></div>
+        </div>
+        <div class="field">
+          <label>Text color</label>
+          <div class="color-field"><input type="color" id="f-text"><input type="text" id="f-textText"></div>
+        </div>
+        <div class="field">
+          <label>Accent / gold color</label>
+          <div class="color-field"><input type="color" id="f-accent"><input type="text" id="f-accentText"></div>
+        </div>
+        <div class="field">
+          <label>Button color</label>
+          <div class="color-field"><input type="color" id="f-button"><input type="text" id="f-buttonText"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Live Preview</h3>
+        <div class="live-preview" id="livePreview">
+          <h4 class="lp-heading" id="lp-heading">I'm Sorry</h4>
+          <div class="lp-card" id="lp-card">A quiet little message card, just like the real one.</div>
+          <span class="lp-btn" id="lp-btn">Open →</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MUSIC -->
+    <section class="section-panel" id="section-music">
+      <div class="page-header"><h2>Music</h2><p>An optional soundtrack — never plays automatically.</p></div>
+      <div class="card">
+        <div class="field toggle-row">
+          <label style="margin:0;">Enable music</label>
+          <label class="switch"><input type="checkbox" id="f-musicEnabled"><span class="slider"></span></label>
+        </div>
+        <div class="field"><label>Music URL</label><input type="url" id="f-musicUrl" placeholder="https://..."></div>
+        <div class="field"><label>Music Title</label><input type="text" id="f-musicTitle" placeholder="Our Song"></div>
+        <p class="hint">Music only starts when your friend taps the music button on the page — it never autoplays.</p>
+      </div>
+    </section>
+
+    <!-- PREVIEW -->
+    <section class="section-panel" id="section-preview">
+      <div class="page-header"><h2>Preview</h2><p>Save your changes, then see them live.</p></div>
+      <div class="card">
+        <h3>Publish</h3>
+        <p class="hint">Preview opens the public page in a new tab using your currently saved settings.</p>
+        <div class="preview-actions">
+          <button class="btn-primary" id="previewBtn">Preview Website</button>
+          <button class="btn-secondary" id="saveBtnBottom">Save Changes</button>
+          <button class="btn-danger" id="resetBtnBottom">Reset to Default</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="action-bar">
+      <button class="btn-primary" id="saveBtn">Save Changes</button>
+      <button class="btn-secondary" id="resetBtn">Reset to Default</button>
+    </div>
+
+  </main>
+
+  <nav class="mobile-nav">
+    <button class="active" data-section="general">General</button>
+    <button data-section="opening">Opening</button>
+    <button data-section="message">Message</button>
+    <button data-section="final">Final</button>
+    <button data-section="design">Design</button>
+    <button data-section="music">Music</button>
+    <button data-section="preview">Preview</button>
+  </nav>
+</div>
+
+<!-- Reset confirmation modal -->
+<div class="modal-overlay" id="resetModal">
+  <div class="modal-box">
+    <h3>Reset everything?</h3>
+    <p>This clears all your customizations and restores the original default content, colors, and music settings. This can't be undone.</p>
+    <div class="modal-actions">
+      <button class="btn-secondary" id="cancelReset">Cancel</button>
+      <button class="btn-danger" id="confirmReset">Reset</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Changes saved ✓</div>
+
+<script src="settings.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
