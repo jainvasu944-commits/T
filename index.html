@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title id="pageTitle">I'm Sorry</title>
+<meta id="websiteTitleMeta" name="description" content="">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="petal-canvas"></canvas>
+
+<div class="stage">
+
+  <svg class="floral-corner tl" viewBox="0 0 300 300" fill="none" stroke="currentColor" stroke-width="1.2">
+    <path d="M20 280 C 40 200, 60 160, 110 120 C 150 90, 180 70, 220 30" />
+    <ellipse cx="110" cy="120" rx="34" ry="20" transform="rotate(35 110 120)" />
+    <ellipse cx="160" cy="90" rx="26" ry="15" transform="rotate(20 160 90)" />
+    <circle cx="220" cy="30" r="16" />
+  </svg>
+  <svg class="floral-corner br" viewBox="0 0 300 300" fill="none" stroke="currentColor" stroke-width="1.2">
+    <path d="M20 280 C 40 200, 60 160, 110 120 C 150 90, 180 70, 220 30" />
+    <ellipse cx="110" cy="120" rx="34" ry="20" transform="rotate(35 110 120)" />
+    <ellipse cx="160" cy="90" rx="26" ry="15" transform="rotate(20 160 90)" />
+    <circle cx="220" cy="30" r="16" />
+  </svg>
+
+  <!-- Opening -->
+  <section class="screen active" data-screen="opening">
+    <div class="card-inner">
+      <span class="eyebrow">FOR <span class="friend-name-slot">YOU</span></span>
+      <h1 class="headline" id="openingHeading"></h1>
+      <p class="subtitle" id="openingSubtitle"></p>
+      <button class="btn" id="openBtn" data-action="next"></button>
+    </div>
+  </section>
+
+  <!-- Message cards injected here -->
+  <div id="cardsContainer"></div>
+
+  <!-- Mini game -->
+  <section class="screen" data-screen="game">
+    <div class="card-inner">
+      <div class="message-card">
+        <h2 class="message-heading">Before You Answer...</h2>
+        <p class="message-body" id="tttStatus" style="margin-bottom:1.2rem;">Your move — you're X.</p>
+        <div id="tttBoard" class="ttt-board"></div>
+        <button class="btn" id="tttContinue" data-action="next" style="display:none; margin-top:1.4rem;">Continue</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Forgive -->
+  <section class="screen" data-screen="forgive">
+    <div class="card-inner">
+      <h2 class="headline" style="font-size:clamp(1.8rem,6vw,2.8rem);">Do you forgive me?</h2>
+      <div class="forgive-buttons" id="forgiveButtons">
+        <button class="btn" id="yesBtn">Yes</button>
+        <button class="btn ghost" id="noBtn">No</button>
+      </div>
+      <p class="small-text">(the second one doesn't really work)</p>
+    </div>
+  </section>
+
+  <!-- Final -->
+  <section class="screen" data-screen="final">
+    <div class="card-inner">
+      <span class="eyebrow" id="finalEyebrow">THANK YOU</span>
+      <h1 class="headline" id="finalHeading" style="font-size:clamp(2rem,7vw,3.4rem);"></h1>
+      <p class="subtitle" id="finalMessage" style="white-space:pre-line;"></p>
+      <p class="signature" id="finalClosing"></p>
+      <button class="btn ghost" id="replayBtn" data-action="none" style="margin-top:1rem;"></button>
+    </div>
+  </section>
+
+  <div class="dot-track" id="dotTrack" style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:5;"></div>
+
+  <button class="music-toggle" id="musicToggle" title="Play music">
+    <svg viewBox="0 0 24 24" fill="currentColor"><rect class="bar" x="4" y="9" width="3" height="6" rx="1.5"/><rect class="bar" x="10.5" y="5" width="3" height="14" rx="1.5"/><rect class="bar" x="17" y="9" width="3" height="6" rx="1.5"/></svg>
+  </button>
+  <audio id="bgAudio" loop></audio>
+
+</div>
+
+<style>
+.ttt-board {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  grid-template-rows: repeat(3, 64px);
+  gap: 8px;
+  margin: 0 auto;
+  justify-content: center;
+}
+.ttt-cell {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 10px;
+  font-family: 'Italiana', serif;
+  font-size: 1.8rem;
+  color: var(--text);
+  cursor: pointer;
+}
+.ttt-cell:disabled { cursor: default; }
+</style>
+
+<script src="settings.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
+
